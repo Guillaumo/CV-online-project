@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello IdentityController!
+{% endblock %}
+
+{% block body %}
+	{% if form_identity is defined %}
+		<section>
+			{{form(form_identity)}}
+			</section>
+		{% endif %}
+		<section>
+			{{form(form_cv)}}
+			</section>
+		{% endblock %}

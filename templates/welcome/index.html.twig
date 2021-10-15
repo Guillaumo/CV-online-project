@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My CV
+{% endblock %}
+
+{% block header %}
+	<h1>Bienvenu sur My CV</h1>
+{% endblock %}
+
+{% block body %}
+	<article>
+		<h2>Etapes pour vous créer un CV en ligne</h2>
+		<section>
+			<a href="{{ path('new_user') }}">1. Vous créer un compte et vous connecter.</a>
+		</section>
+		<section>
+			<a href="{{ path('cv') }}">2. Un CV pour quel job ?</a>
+		</section>
+		<section>
+			<a href="{{ path('identity') }}">3. Votre carte de visite.</a>
+		</section>
+		<section>
+			<a href="{{ path('identity') }}">4. Créer une rubrique.</a>
+			<span>Exemple : Expériences  professionnelles</span>
+		</section>
+		{# cette section apparaît quand au moins une rubrique est créée #}
+		<section>
+			<form>
+				<label for="headings">Sélectionner la rubrique :</label>
+				<select name="headings" id="headings">
+					<option value="">Expériences professionnelles</option>
+				</select>
+			</form>
+			<a href="{{ path('identity') }}">5. Créer un élément de la rubrique sélectionnée.</a>
+		</section>
+	</article>
+	<aside>
+		<h3>Les éléments de votre CV</h3>
+	</aside>
+
+{% endblock %}
+{% block footer %}{% endblock %}
