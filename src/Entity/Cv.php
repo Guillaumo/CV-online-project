@@ -35,6 +35,11 @@ class Cv
      */
     private $headings;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
+
     public function __construct()
     {
         $this->headings = new ArrayCollection();
@@ -92,6 +97,18 @@ class Cv
         if ($this->headings->removeElement($heading)) {
             $heading->removeCv($this);
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

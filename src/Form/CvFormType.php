@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class CvFormType extends AbstractType
 {
@@ -15,6 +16,7 @@ class CvFormType extends AbstractType
     {
         $builder
             ->add('title', TextareaType::class, ['label' => 'Intitulé du poste'])
+            ->add('slug', TextType::class, ['label' => 'Nom de votre CV'])
             ->add('submit', SubmitType::class, ['label' => 'Valider'])
         ;
     }

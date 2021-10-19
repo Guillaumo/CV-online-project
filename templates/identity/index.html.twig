@@ -8,8 +8,9 @@
 		<section>
 			{{form(form_identity)}}
 			</section>
-		{% endif %}
-		<section>
-			{{form(form_cv)}}
-			</section>
+		{% elseif form_cv is defined %}
+			<section>
+				{{form(form_cv)}}
+				</section>
+			{% endif %}
 		{% endblock %}
