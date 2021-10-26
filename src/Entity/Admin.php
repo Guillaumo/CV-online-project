@@ -4,11 +4,14 @@ namespace App\Entity;
 
 use App\Repository\AdminRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=AdminRepository::class)
+ * @UniqueEntity("username",
+ * message="L'identifiant {{ value }} saisi existe déjà, merci de bien vouloir en choisir un autre.")
  */
 class Admin implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -20,7 +23,7 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @ORM\Column(name="username", type="string", length=180, unique=true)
      */
     private $username;
 

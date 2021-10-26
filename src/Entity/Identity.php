@@ -6,9 +6,13 @@ use App\Repository\IdentityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=IdentityRepository::class)
+ * @UniqueEntity("email",
+ * message="L'email {{ value }} saisi existe déjà, merci de bien vouloir en choisir un autre.")
  */
 class Identity
 {
@@ -60,7 +64,9 @@ class Identity
     private $telephone;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
+     * @Assert\NotBlank
+     * @Assert\Email(message = "L'email '{{ value }} n'est pas un email valide")
      */
     private $email;
 

@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class IdentityController extends AbstractController
 {
     /**
-     * @Route("/user/identity", name="identity")
+     * @Route("/user/identity", name="user")
      */
     public function editIdentity(): Response
     {

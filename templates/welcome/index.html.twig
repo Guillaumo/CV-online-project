@@ -1,26 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}My CV
+{% block title %}Bienvenu sur My CV
 {% endblock %}
 
 {% block header %}
-	<h1>Bienvenu sur My CV</h1>
+	<nav class="navbar navbar-expand d-flex navbar-light">
+		<ul class="navbar-nav justify-content-start">
+			<a href="{{ path('welcome') }}" class="navbar-brand justify-content-center">
+				<h1 class="nav-title">My CV</h1>
+			</a>
+		</ul>
+		<ul class="navbar-nav justify-content-end">
+			<li class="nav-item p-1">
+				<a href="{{ path('welcome') }}" class="nav-link">Accueil</a>
+			</li>
+			<li class="nav-item p-1">
+				<a href="{{ path('user') }}" class="nav-link">Votre espace</a>
+			</li>
+			<li class="nav-item p-1">
+				<a href="{{ path('app_login') }}" class="nav-link">Connectez-vous</a>
+			</li>
+		</ul>
+	</nav>
 {% endblock %}
 
 {% block body %}
-	<article>
-		<h2>Etapes pour vous créer un CV en ligne</h2>
-		<section>
-			<a href="{{ path('new_user') }}">1. Vous créer un compte et vous connecter.</a>
-		</section>
+
+	<div class="row">
+		<div class="col-12">
+			<div class="d-flex flex-column justify-content-center align-items-center">
+				<h1>My CV</h1>
+				<h2 class="mt-5">Un site pour afficher votre CV en ligne</h2>
+				<a href="{{ path('new_user') }}" class="btn btn-success mt-5">
+					Créer un compte
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<aside>
 		<section>
 			<a href="{{ path('cv') }}">2. Un CV pour quel job ?</a>
 		</section>
 		<section>
-			<a href="{{ path('identity') }}">3. Votre carte de visite.</a>
+			<a href="{{ path('user') }}">3. Votre carte de visite.</a>
 		</section>
 		<section>
-			<a href="{{ path('identity') }}">4. Créer une rubrique.</a>
+			<a href="{{ path('user') }}">4. Créer une rubrique.</a>
 			<span>Exemple : Expériences  professionnelles</span>
 		</section>
 		{# cette section apparaît quand au moins une rubrique est créée #}
@@ -31,10 +57,8 @@
 					<option value="">Expériences professionnelles</option>
 				</select>
 			</form>
-			<a href="{{ path('identity') }}">5. Créer un élément de la rubrique sélectionnée.</a>
+			<a href="{{ path('user') }}">5. Créer un élément de la rubrique sélectionnée.</a>
 		</section>
-	</article>
-	<aside>
 		<h3>Les éléments de votre CV</h3>
 	</aside>
 
