@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification de votre identité
+{% endblock %}
+
+{% block header %}
+	{% include "./partials/header.html.twig" %}
+{% endblock %}
+
+{% block body %}
+	<section>
+		{{form_start(form_identity)}}
+		{{form_row(form_identity.picture, { 'value': app.user.identity.picture })}}
+		{{form_row(form_identity.lastname, { 'value': app.user.identity.lastname })}}
+		{{form_row(form_identity.firstname, { 'value': app.user.identity.firstname })}}
+		{{form_row(form_identity.address, { 'value': app.user.identity.address })}}
+		{{form_row(form_identity.zipcode, { 'value': app.user.identity.zipcode })}}
+		{{form_row(form_identity.city, { 'value': app.user.identity.city })}}
+		{{form_row(form_identity.state, { 'value': app.user.identity.state })}}
+		{{form_row(form_identity.telephone, { 'value': app.user.identity.telephone })}}
+		{{form_row(form_identity.email, { 'value': app.user.identity.email })}}
+		{{form_row(form_identity.submit)}}
+		{{form_end(form_identity)}}
+	</section>
+
+{% endblock %}
+
+{% block footer %}
+	{% include "./partials/footer.html.twig" %}
+{% endblock %}

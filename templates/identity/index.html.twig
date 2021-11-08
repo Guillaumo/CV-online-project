@@ -1,16 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello IdentityController!
+{% block title %}Espace utilisateur
+{% endblock %}
+
+{% block header %}
+	{% include "./partials/header.html.twig" %}
 {% endblock %}
 
 {% block body %}
-	{% if form_identity is defined %}
-		<section>
-			{{form(form_identity)}}
-			</section>
-		{% elseif form_cv is defined %}
-			<section>
-				{{form(form_cv)}}
-				</section>
+
+	<div class="row">
+		<section class="col border-end border-success">
+			{% if cvs %}
+				<p>Vos CV :</p>
+				<ul class="list-group list-group-flush">
+					{% for cv in cvs %}
+						<li class="list-group-item">
+							{{ cv.title }}
+						</li>
+					{% endfor %}
+				</ul>
+			{% else %}
+				<card>
+					<p>Vous n'avez pas encore créé de CV.</p>
+				</card>
 			{% endif %}
-		{% endblock %}
+		</section>
+
+		<section class="col">
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item">
+					<a href="{{path('user_identity')}}" class="btn btn-success">Votre identité</a>
+				</li>
+				<li class="list-group-item">
+					<a href="{{path('user_newcv')}}" class="btn btn-success">Un nouveau CV pour quel job ?</a>
+				</li>
+			</ul>
+		</section>
+	</div>
+
+{% endblock %}
+
+{% block footer %}
+	{% include "./partials/footer.html.twig" %}
+{% endblock %}

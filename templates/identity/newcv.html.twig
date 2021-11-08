@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau CV
+{% endblock %}
+
+{% block header %}
+	{% include "./partials/header.html.twig" %}
+{% endblock %}
+
+{% block body %}
+
+	<section>
+		{{form_start(form_cv)}}
+		{{form_row(form_cv.title)}}
+		{{form_label(form_cv.slug)}}
+		{{form_widget(form_cv.slug)}}
+		{{form_row(form_cv.submit)}}
+		{{form_end(form_cv)}}
+	</section>
+
+{% endblock %}
+
+{% block footer %}
+	{% include "./partials/footer.html.twig" %}
+{% endblock %}

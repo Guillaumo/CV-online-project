@@ -4,43 +4,34 @@
 {% endblock %}
 
 {% block header %}
-	<nav class="navbar navbar-expand d-flex navbar-light">
-		<ul class="navbar-nav justify-content-start">
-			<a href="{{ path('welcome') }}" class="navbar-brand justify-content-center">
-				<h1 class="nav-title">My CV</h1>
-			</a>
-		</ul>
-		<ul class="navbar-nav justify-content-end">
-			<li class="nav-item p-1">
-				<a href="{{ path('welcome') }}" class="nav-link">Accueil</a>
-			</li>
-			<li class="nav-item p-1">
-				<a href="{{ path('user') }}" class="nav-link">Votre espace</a>
-			</li>
-			<li class="nav-item p-1">
-				<a href="{{ path('app_login') }}" class="nav-link">Connectez-vous</a>
-			</li>
-		</ul>
-	</nav>
+	{% include "./partials/header.html.twig" %}
 {% endblock %}
 
 {% block body %}
-
 	<div class="row">
 		<div class="col-12">
 			<div class="d-flex flex-column justify-content-center align-items-center">
 				<h1>My CV</h1>
 				<h2 class="mt-5">Un site pour afficher votre CV en ligne</h2>
-				<a href="{{ path('new_user') }}" class="btn btn-success mt-5">
-					Créer un compte
-				</a>
+				{% if app.user %}
+					<a href="{{ path('user_newcv') }}" class="btn btn-success mt-5">
+						Un nouveau CV pour quel job ?
+					</a>
+					<a href="{{ path('user') }}" class="btn btn-success mt-5">
+						Voir vos CV
+					</a>
+				{% else %}
+					<a href="{{ path('new_user') }}" class="btn btn-success mt-5">
+						Créer un compte
+					</a>
+				{% endif %}
 			</div>
 		</div>
 	</div>
 
 	<aside>
 		<section>
-			<a href="{{ path('cv') }}">2. Un CV pour quel job ?</a>
+			<a href="{{ path('user_newcv') }}">2. Un CV pour quel job ?</a>
 		</section>
 		<section>
 			<a href="{{ path('user') }}">3. Votre carte de visite.</a>
@@ -63,4 +54,7 @@
 	</aside>
 
 {% endblock %}
-{% block footer %}{% endblock %}
+
+{% block footer %}
+	{% include "./partials/footer.html.twig" %}
+{% endblock %}

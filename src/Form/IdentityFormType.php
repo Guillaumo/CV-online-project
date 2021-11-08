@@ -17,7 +17,7 @@ class IdentityFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('picture', FileType::class, ['label' => 'Illustration'])
+            ->add('picture', FileType::class, ['label' => 'Photo'])
             ->add('lastname', TextType::class, ['label' => 'Nom'])
             ->add('firstname', TextType::class, ['label' => 'Prénom'])
             ->add('address', TextType::class, ['label' => 'Adresse'])
