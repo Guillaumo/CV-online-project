@@ -6,13 +6,12 @@ use App\Repository\IdentityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=IdentityRepository::class)
- * @UniqueEntity("email",
- * message="L'email {{ value }} saisi existe déjà, merci de bien vouloir en choisir un autre.")
  */
 class Identity
 {
@@ -248,5 +247,28 @@ class Identity
         $this->admin = $admin;
 
         return $this;
+    }
+
+    /**
+     * fonction permettant de parcourir toutes les propriétés de l'objet et si des valeurs leur sont affectées
+     * true si au moins une propriété est nulle ou false sinon
+     * @return Bool
+     */
+    public function fieldAsNull(): Bool
+    {
+        $is_field_as_null = false;
+        foreach ($this as $key => $value) {
+            if ($key === "cvs") {
+                break;
+            }
+            if ($key === "state") {
+                continue;
+            }
+            if (is_null($value)) {
+                $is_field_as_null=true;
+                return $is_field_as_null;
+            }
+            return $is_field_as_null;
+        }
     }
 }

@@ -8,12 +8,24 @@
 {% endblock %}
 
 {% block body %}
-
+	<h2>
+		Création d'un CV</h2>
 	<section>
 		{{form_start(form_cv)}}
 		{{form_row(form_cv.title)}}
-		{{form_label(form_cv.slug)}}
-		{{form_widget(form_cv.slug)}}
+		<div class="row mb-4 justify-content-center pl-4 pr-0">
+			<div class="col-4 align-self-end">
+				{{form_label(form_cv.slug)}}
+				<span class="text-right">du type
+					{{ app.request.schemeAndHttpHost }}/
+				</span>
+
+			</div>
+			<div class="col-4">
+				{{form_widget(form_cv.slug)}}
+			</div>
+			<p class="small text-center text-muted">Mettre un nom évocateur pour votre CV mais ne mettez pas vos identifiants de compte.</p>
+		</div>
 		{{form_row(form_cv.submit)}}
 		{{form_end(form_cv)}}
 	</section>

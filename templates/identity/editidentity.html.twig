@@ -8,9 +8,13 @@
 {% endblock %}
 
 {% block body %}
+	<h2>Modification de votre identité</h2>
 	<section>
 		{{form_start(form_identity)}}
-		{{form_row(form_identity.picture, { 'value': app.user.identity.picture })}}
+		{{form_row(form_identity.picture)}}
+		<p>Votre fichier photo du moment :
+			{{ app.user.identity.picture }}
+		</p>
 		{{form_row(form_identity.lastname, { 'value': app.user.identity.lastname })}}
 		{{form_row(form_identity.firstname, { 'value': app.user.identity.firstname })}}
 		{{form_row(form_identity.address, { 'value': app.user.identity.address })}}

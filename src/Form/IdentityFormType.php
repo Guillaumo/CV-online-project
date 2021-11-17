@@ -17,14 +17,18 @@ class IdentityFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('picture', FileType::class, ['label' => 'Photo'])
+            ->add('picture', FileType::class, [
+                'label' => 'Photo',
+                'mapped' => false,
+                'required' => false,
+                ])
             ->add('lastname', TextType::class, ['label' => 'Nom'])
             ->add('firstname', TextType::class, ['label' => 'Prénom'])
-            ->add('address', TextType::class, ['label' => 'Adresse'])
-            ->add('zipcode', TextType::class, ['label' => 'Code postal'])
-            ->add('city', TextType::class, ['label' => 'Ville'])
-            ->add('state', TextType::class, ['label' => 'Pays'])
-            ->add('telephone', TelType::class, ['label' => 'téléphone'])
+            ->add('address', TextType::class, ['label' => 'Adresse','required' => false,])
+            ->add('zipcode', TextType::class, ['label' => 'Code postal','required' => false,])
+            ->add('city', TextType::class, ['label' => 'Ville','required' => false,])
+            ->add('state', TextType::class, ['label' => 'Pays','required' => false,])
+            ->add('telephone', TelType::class, ['label' => 'téléphone','required' => false,])
             ->add('email', EmailType::class)
             ->add('submit', SubmitType::class, ['label' => 'Valider'])
         ;
