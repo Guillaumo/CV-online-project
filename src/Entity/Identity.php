@@ -250,25 +250,28 @@ class Identity
     }
 
     /**
-     * fonction permettant de parcourir toutes les propriétés de l'objet et si des valeurs leur sont affectées
-     * true si au moins une propriété est nulle ou false sinon
+     * Fonction permettant de parcourir toutes les propriétés de l'objet et si des valeurs leur sont affectées.
+     * Retourne true si au moins une propriété est nulle ou false sinon
      * @return Bool
      */
-    public function fieldAsNull(): Bool
+    public function fieldAsNull()
     {
-        $is_field_as_null = false;
+        // $is_field_as_null = false;
         foreach ($this as $key => $value) {
             if ($key === "cvs") {
                 break;
+            }
+            if ($key === "__initializer__" || $key === "__cloner__" || $key === "__isInitialized__") {
+                continue;
             }
             if ($key === "state") {
                 continue;
             }
             if (is_null($value)) {
-                $is_field_as_null=true;
-                return $is_field_as_null;
+                // $is_field_as_null=true;
+                return true;
             }
-            return $is_field_as_null;
         }
+        return false;
     }
 }

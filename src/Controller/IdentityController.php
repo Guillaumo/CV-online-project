@@ -68,10 +68,10 @@ class IdentityController extends AbstractController
                 $newFilename = $safeFilename.'-'.uniqid().'.'.$picture_file->guessExtension();
                 // On le sauvegarde dans un répertoire défini
                 $picture_file->move($this->getParameter('identity_picture'), $newFilename);
+                // Mise à jour de la propriété picture de l'entité Identity
+                $identity->setPicture($newFilename);
             }
             // Mise à jour de l'objet identity
-            $identity = $form_identity->getData();
-            $identity->setPicture($newFilename);
             $em->persist($identity);
             $em->flush();
 
@@ -85,11 +85,25 @@ class IdentityController extends AbstractController
     /**
      * @Route("/user/newcv", name="user_newcv")
      */
-    public function editCv(): Response
+    public function newCv(Request $request, EntityManagerInterface $em): Response
     {
+        // On récupère l'objet identity correspondant à l'user connecté
+        $user=$this->getUser();
+        $identity = $user->getIdentity();
+        // On instancie un nouvel objet CV
         $cv = new Cv();
+        // Initialisation du formulaire de création d'un CV de l'user connecté
         $form_cv = $this->createForm(CvFormType::class, $cv);
+        // Récupération des champs remplis
+        $form_cv->handleRequest($request);
+        // Lors de la soumission et de la validation des données saisies du formualaire
+        if ($form_cv->isSubmitted() && $form_cv->isValid()) {
+            $cv->setIdentity($identity);
+            $em->persist($cv);
+            $em->flush();
 
+            return $this->redirectToRoute('user_cv', ['id' => $cv->getId()]);
+        }
         return $this->render('identity/newcv.html.twig', [
             'form_cv' => $form_cv->createView()
         ]);

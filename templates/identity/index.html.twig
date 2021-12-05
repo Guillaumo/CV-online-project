@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block javascripts %}
-	<script src="{{ asset('js/identity.js') }}" defer></script>
+	<script src="{{ asset('js/toggle_right_menu.js') }}" defer></script>
 {% endblock %}
 
 {% block header %}
@@ -16,10 +16,13 @@
 		<section class="col border-end border-success">
 			<h2>Vos CV :</h2>
 			{% if cvs %}
+				<h3 class="h4">Sélectionner le CV :</h3>
 				<ul class="list-group list-group-flush">
 					{% for cv in cvs %}
 						<li class="list-group-item">
-							{{ cv.title }}
+							<a href="{{path('user_cv', {id: cv.id }) }}">
+								{{ cv.title|raw }}
+							</a>
 						</li>
 					{% endfor %}
 				</ul>
@@ -31,16 +34,16 @@
 		</section>
 
 		<section class="col">
-			<ul class="list-group list-group-flush">
+			<ul class="list-group list-group-flush" id="ulIdentity">
 				<li class="list-group-item">
-					<button class="btn btn-success" type="button" id="toggleIdentity">
+					<button class="btn btn-success toggleButton" type="button" id="toggleIdentity">
 						Votre identité
 						<i class='fas fa-angle-down' style="display:inline-block;"></i>
 						<i class='fas fa-angle-up' style="display:none;"></i>
 					</button>
 					<p class="text-danger">{{ message }}</p>
 				</li>
-				<li id="identity" class="list-group-item" style="display:none;">
+				<li id="identity" class="list-group- toggleContent" style="display:none;">
 					<ul class="list-group list-group-flush text-center">
 						<li class="list-group-item">
 							<image src="{{ asset('picture_uploads/'~app.user.identity.picture) }}" alt="Ici une photo d'identité ?" width="150">

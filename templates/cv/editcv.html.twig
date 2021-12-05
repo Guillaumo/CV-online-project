@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification de l'intitulé votre CV
+{% endblock %}
+
+{% block header %}
+	{% include "./partials/header.html.twig" %}
+{% endblock %}
+
+{% block body %}
+	<h2>Modification de l'intitulé votre CV</h2>
+	<section>
+		{{form_start(form_editcv)}}
+
+		{{form_row(form_editcv.title, { 'value': cv.title })}}
+		{{form_row(form_editcv.slug, { 'value': cv.slug })}}
+		{{form_row(form_editcv.submit)}}
+		{{form_end(form_editcv)}}
+	</section>
+
+{% endblock %}
+
+{% block footer %}
+	{% include "./partials/footer.html.twig" %}
+{% endblock %}
