@@ -3,8 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Heading;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Heading|null find($id, $lockMode = null, $lockVersion = null)
@@ -22,19 +22,16 @@ class HeadingRepository extends ServiceEntityRepository
     // /**
     //  * @return Heading[] Returns an array of Heading objects
     //  */
-    /*
-    public function findByExampleField($value)
+    public function findByCvs($value)
     {
         return $this->createQueryBuilder('h')
-            ->andWhere('h.exampleField = :val')
+            ->andWhere(':val MEMBER OF h.cvs')
             ->setParameter('val', $value)
             ->orderBy('h.id', 'ASC')
-            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Heading

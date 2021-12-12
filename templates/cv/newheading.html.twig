@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création d'une rubrique de votre CV
+{% endblock %}
+
+{% block header %}
+	{% include "./partials/header.html.twig" %}
+{% endblock %}
+
+{% block body %}
+	<h2>Création d'une rubrique de votre CV : {{ cv.title|raw }}</h2>
+	<section>
+		{{form_start(form_newheading)}}
+		{{form_row(form_newheading.title)}}
+		{{form_row(form_newheading.submit)}}
+		{{form_end(form_newheading)}}
+	</section>
+
+{% endblock %}
+
+{% block footer %}
+	{% include "./partials/footer.html.twig" %}
+{% endblock %}

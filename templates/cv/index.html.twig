@@ -14,84 +14,26 @@
 {% block body %}
 	<div class="row">
 		<section class="col border-end border-success">
-			<h2>Contenus du CV :
-				{{ cv.title|raw }}</h2>
-			{# {% if cvs %}
-																																																																																																																				<h3 class="h4">Eléments de votre CV :</h3>
-																																																																																																																				<ul class="list-group list-group-flush">
-																																																																																																																					{% for cv in cvs %}
-																																																																																																																						<li class="list-group-item">
-																																																																																																																							{{ cv.title|raw }}
-																																																																																																																						</li>
-																																																																																																																					{% endfor %}
-																																																																																																																				</ul>
-																																																																																																																			{% else %}
-																																																																																																																				<card>
-																																																																																																																					<p>Vous n'avez pas encore créé de rubriques.</p>
-																																																																																																																				</card>
-																																																																																																																			{% endif %} #}
+			<h2>Contenus du CV :</h2>
+				{{ cv.title|raw }}
+			{% if headings %}
+				<h3 class="h4">Eléments de votre CV :</h3>
+				<ul class="list-group list-group-flush">
+					{% for heading in headings %}
+						<li class="list-group-item">
+							{{ heading.title|raw }}
+						</li>
+					{% endfor %}
+				</ul>
+			{% else %}
+				<card>
+					<p>Vous n'avez pas encore créé ou ajouté de rubriques pour ce CV.</p>
+				</card>
+			{% endif %}
 		</section>
 
 		<section class="col">
-			<ul class="list-group list-group-flush" id="ulIdentity">
-				<li class="list-group-item">
-					<button class="btn btn-success toggleButton" type="button" id="toggleIdentity">
-						Votre identité
-						<i class='fas fa-angle-down' style="display:inline-block;"></i>
-						<i class='fas fa-angle-up' style="display:none;"></i>
-					</button>
-					<p class="text-danger">{{ message }}</p>
-				</li>
-				<li id="identity" class="list-group-item toggleContent" style="display:none;">
-					<ul class="list-group list-group-flush text-center">
-						<li class="list-group-item">
-							<image src="{{ asset('picture_uploads/'~app.user.identity.picture) }}" alt="Ici une photo d'identité ?" width="150">
-						</li>
-						<li class="list-group-item">Nom :
-							{{ app.user.identity.lastname }}</li>
-						<li class="list-group-item">Prénom :
-							{{ app.user.identity.firstname }}</li>
-						<li class="list-group-item">Adresse :
-							{% if app.user.identity.address is null %}
-								<span class="text-danger">Champ adresse non rempli</span>
-							{% else %}
-								{{ app.user.identity.address }}
-							{% endif %}
-						</li>
-						<li class="list-group-item">Code postal :
-							{% if app.user.identity.zipcode is null %}
-								<span class="text-danger">Champ code postal non rempli</span>
-							{% else %}
-								{{ app.user.identity.zipcode }}
-							{% endif %}
-						</li>
-						<li class="list-group-item">Ville :
-							{% if app.user.identity.city is null %}
-								<span class="text-danger">Champ ville non rempli</span>
-							{% else %}
-								{{ app.user.identity.city }}
-							{% endif %}
-						</li>
-						{% if app.user.identity.state %}
-							<li class="list-group-item">Pays :
-								{{ app.user.identity.state }}
-							</li>
-						{% endif %}
-						<li class="list-group-item">Email :
-							{{ app.user.identity.email }}</li>
-						<li class="list-group-item">Télephone :
-							{% if app.user.identity.telephone is null %}
-								<span class="text-danger">Champ téléphone non rempli</span>
-							{% else %}
-								{{ app.user.identity.telephone }}
-							{% endif %}
-						</li>
-						<li class="list-group-item">
-							<a href="{{path('user_identity')}}" class="btn btn-outline-success">Compléter/Modifier votre identité</a>
-						</li>
-					</ul>
-				</li>
-			</u>
+			{% include "./partials/identity.html.twig" %}
 			<ul class="list-group list-group-flush" id="ulCv">
 				<li class="list-group-item">
 					<button class="btn btn-success btn-block toggleButton" type="button" id="toggleCv">
@@ -111,19 +53,34 @@
 							Adresse de votre CV :
 							{{ app.request.schemeAndHttpHost }}/{{ cv.slug }}
 						</li>
-						<li
-							class="list-group-item">
-							{# modifier le path pour le formulaire de modification de cv #}
+						<li class="list-group-item">
 							<a href="{{ path('user_editcv', {id: cv.id}) }}" class="btn btn-outline-success">Modifier l'intulé de votre CV</a>
 						</li>
 					</ul>
 				</li>
-				<li
-					class="list-group-item">
-					{# modifier le path pour le formulaire de création d'une rubrique #}
-					<a href="{{path('user_newcv')}}" class="btn btn-success">Une nouvelle rubrique pour votre CV ?</a>
+				<li class="list-group-item">
+					<a href="{{ path('user_newheading', {id: cv.id}) }}" class="btn btn-success">Une nouvelle rubrique pour votre CV ?</a>
+				</li>
+				<li class="list-group-item">
 				</li>
 			</ul>
+			{% if all_headings %}
+				<h5>Les rubriques existantes :</h5>
+				<ul class="list-group list-group-flush" id="">
+					{% for heading in all_headings %}
+							<li class="list-group-item">
+								{{ heading.title|raw }}
+							</li>
+						{% endfor %}
+				</ul>
+			{% else %}
+				<ul class="list-group list-group-flush" id="">
+					<li class="list-group-item">
+						<p>Aucune rubrique n'a encore été créée.</p>
+					</li>
+				</ul>
+			{% endif %}
+			
 		</section>
 	</div>
 {% endblock %}
