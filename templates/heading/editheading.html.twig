@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification d'une rubrique de votre CV
+{% endblock %}
+
+{% block header %}
+	{% include "./partials/header.html.twig" %}
+{% endblock %}
+
+{% block body %}
+	<h2>Modification de la rubrique</h2>
+    {{ heading.title|raw }}
+	<section>
+		{{form_start(form_editheading)}}
+
+		{{form_row(form_editheading.title, { 'value': heading.title })}}
+		{{form_row(form_editheading.submit)}}
+		{{form_end(form_editheading)}}
+	</section>
+
+{% endblock %}
+
+{% block footer %}
+	{% include "./partials/footer.html.twig" %}
+{% endblock %}

@@ -32,6 +32,7 @@ class CvController extends AbstractController
         }
         // On récupère le cas échéant la liste (tableau) des rubriques (Heading) associés à l'instance de CV
         $headings_for_cv_instance = $headingRepository->findByCvs([$cv]);
+        // On récupére le cas échéant toutes les rubriques (Heading) existantes si elles existent
         $all_headings = $headingRepository->findAll();
         
         

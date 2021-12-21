@@ -15,13 +15,28 @@
 	<div class="row">
 		<section class="col border-end border-success">
 			<h2>Contenus du CV :</h2>
-				{{ cv.title|raw }}
+			{{ cv.title|raw }}
 			{% if headings %}
 				<h3 class="h4">Eléments de votre CV :</h3>
 				<ul class="list-group list-group-flush">
 					{% for heading in headings %}
 						<li class="list-group-item">
-							{{ heading.title|raw }}
+							{{ heading.title|replace({'<p>': '<span>','</p>': '</span>'})|raw }}
+							<a href="{{ path('user_editheading', {c_id: cv.id, h_id: heading.id}) }}" class="text-black">
+								<i class="fas fa-edit" title="Modifier"></i>
+							</a>
+							<a href="{{ path('user_removeheading', {c_id: cv.id, h_id: heading.id}) }}" class="text-black" onclick="return confirm('Voulez vous vraiment supprimer cette rubrique du CV.')" ;>
+								<i class="far fa-trash-alt " title="Supprimer du CV"></i>
+							</a>
+							<p>
+								{% if heading.articles|length %}
+									Cette rubrique a du contenu
+									<i class="far fa-file-alt " title="Ouvrir le contenu"></i>
+								{% else %}
+									Cette rubrique n'a pas de contenu
+									<i class="fas fa-plus " title="Ajouter un contenu"></i>
+								{% endif %}
+							</p>
 						</li>
 					{% endfor %}
 				</ul>
@@ -61,17 +76,21 @@
 				<li class="list-group-item">
 					<a href="{{ path('user_newheading', {id: cv.id}) }}" class="btn btn-success">Une nouvelle rubrique pour votre CV ?</a>
 				</li>
-				<li class="list-group-item">
-				</li>
+				<li class="list-group-item"></li>
 			</ul>
 			{% if all_headings %}
 				<h5>Les rubriques existantes :</h5>
 				<ul class="list-group list-group-flush" id="">
 					{% for heading in all_headings %}
-							<li class="list-group-item">
-								{{ heading.title|raw }}
-							</li>
-						{% endfor %}
+						<li class="list-group-item">
+							{{ heading.title|replace({'<p>': '<span>','</p>': '</span>'})|raw }}
+							<a href="{{ path('user_addheading', {c_id: cv.id, h_id: heading.id}) }}" class="text-black">
+								<i class="fas fa-plus " title="Ajouter au CV"></i>
+							</a>
+							{# Ajouter une alerte avec si la rubrique contient du contenu, celui-ci sera supprimé #}
+							<i class="far fa-trash-alt " title="Supprimer"></i>
+						</li>
+					{% endfor %}
 				</ul>
 			{% else %}
 				<ul class="list-group list-group-flush" id="">
@@ -80,7 +99,7 @@
 					</li>
 				</ul>
 			{% endif %}
-			
+
 		</section>
 	</div>
 {% endblock %}
