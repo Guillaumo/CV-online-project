@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modification d'une rubrique de votre CV
+{% block title %}Création d'un contenu d'une rubrique
 {% endblock %}
 
 {% block header %}
@@ -8,19 +8,22 @@
 {% endblock %}
 
 {% block body %}
-	<h2>Modification de la rubrique</h2>
-	{{ heading.title|raw }}
+	<pre>
+	{{ dump(message) }}
+</pre>
+	<h2>Création d'un contenu de la rubrique :
+		{{ heading.title|raw }}</h2>
 	<section>
-		{{form_start(form_editheading)}}
-
-		{{form_row(form_editheading.title, { 'value': heading.title })}}
+		{{form_start(form_newarticle)}}
+		{{form_row(form_newarticle.title)}}
+		{{form_row(form_newarticle.content)}}
 		<div class="d-flex justify-content-around">
-			{{form_row(form_editheading.submit)}}
+			{{form_row(form_newarticle.submit)}}
 			<div>
 				<a href="{{ path('user_cv', {id: cv.id}) }}" class="btn btn-outline-primary">Annuler</a>
 			</div>
 		</div>
-		{{form_end(form_editheading)}}
+		{{form_end(form_newarticle)}}
 	</section>
 
 {% endblock %}

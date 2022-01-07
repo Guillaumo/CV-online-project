@@ -73,7 +73,7 @@ class CvController extends AbstractController
     {
         // On instancie un nouvel objet Heading
         $heading= new Heading();
-        // Initialisation du formulaire de modification d'un CV de l'user connecté
+        // Initialisation du formulaire de création d'une rubrique pour le CV sélectionné
         $form_newheading = $this->createForm(HeadingFormType::class, $heading);
         // Récupération des champs remplis
         $form_newheading->handleRequest($request);

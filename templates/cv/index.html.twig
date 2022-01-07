@@ -23,20 +23,42 @@
 						<li class="list-group-item">
 							{{ heading.title|replace({'<p>': '<span>','</p>': '</span>'})|raw }}
 							<a href="{{ path('user_editheading', {c_id: cv.id, h_id: heading.id}) }}" class="text-black">
-								<i class="fas fa-edit" title="Modifier"></i>
+								<i class="fa fa-edit" title="Modifier la rubrique"></i>
 							</a>
+							&nbsp;
 							<a href="{{ path('user_removeheading', {c_id: cv.id, h_id: heading.id}) }}" class="text-black" onclick="return confirm('Voulez vous vraiment supprimer cette rubrique du CV.')" ;>
-								<i class="far fa-trash-alt " title="Supprimer du CV"></i>
+								<i class="fas fa-unlink " title="Supprimer la rubrique du CV"></i>
 							</a>
-							<p>
-								{% if heading.articles|length %}
-									Cette rubrique a du contenu
-									<i class="far fa-file-alt " title="Ouvrir le contenu"></i>
-								{% else %}
+
+							{% if heading.articles|length %}
+								<div class="m-0">
+									<a href="{{ path('user_newarticle', {c_id: cv.id, h_id: heading.id}) }}" class="text-black">
+										<i class="fas fa-plus " title="Ajouter un contenu"></i>
+									</a>
+								</div>
+								{% for article in heading.articles %}
+									<card>
+										{{ article.title|replace({'<p>': '<span>','</p>': '</span>'})|raw }}
+										<a href="{{ path('user_editarticle', {c_id: cv.id, a_id: article.id}) }}" class="text-black">
+											<i class="fas fa-edit" title="Modifier le contenu"></i>
+										</a>
+										&nbsp;
+										<a href="{{ path('user_removearticle', {c_id: cv.id, a_id: article.id}) }}" class="text-black" onclick="return confirm('Voulez vous vraiment supprimer ce contenu.')" ;>
+											<i class="far fa-trash-alt " title="Supprimer le contenu"></i>
+										</a>
+										{{ article.content|raw }}
+									</card>
+
+								{% endfor %}
+							{% else %}
+								<p>
 									Cette rubrique n'a pas de contenu
-									<i class="fas fa-plus " title="Ajouter un contenu"></i>
-								{% endif %}
-							</p>
+									<a href="{{ path('user_newarticle', {c_id: cv.id, h_id: heading.id}) }}" class="text-black">
+										<i class="fas fa-plus " title="Ajouter un contenu"></i>
+									</a>
+								</p>
+							{% endif %}
+
 						</li>
 					{% endfor %}
 				</ul>
@@ -80,6 +102,11 @@
 			</ul>
 			{% if all_headings %}
 				<h5>Les rubriques existantes :</h5>
+				{% for error in app.flashes('error') %}
+					<div class="alert alert-danger" role="alert">
+						{{ error }}
+					</div>
+				{% endfor %}
 				<ul class="list-group list-group-flush" id="">
 					{% for heading in all_headings %}
 						<li class="list-group-item">
@@ -87,6 +114,7 @@
 							<a href="{{ path('user_addheading', {c_id: cv.id, h_id: heading.id}) }}" class="text-black">
 								<i class="fas fa-plus " title="Ajouter au CV"></i>
 							</a>
+							&nbsp;
 							{# Ajouter une alerte avec si la rubrique contient du contenu, celui-ci sera supprimé #}
 							<i class="far fa-trash-alt " title="Supprimer"></i>
 						</li>
