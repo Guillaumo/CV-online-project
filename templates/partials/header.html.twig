@@ -1,19 +1,20 @@
 <header class="container">
 	<nav class="navbar navbar-expand d-flex navbar-light">
 		<ul class="navbar-nav justify-content-start">
-			<a href="{{ path('welcome') }}" class="navbar-brand justify-content-center">
+			<a href="{{ path('welcome') }}" class="navbar-brand justify-content-center d-flex">
+				<img src="/images/logo_cv.png" class="nav-logo mx-2" alt="">
 				<h1 class="nav-title">My CV</h1>
 			</a>
 		</ul>
 		<ul class="navbar-nav justify-content-end">
 			<li class="nav-item p-1">
-				<a href="{{ path('welcome') }}" class="nav-link">Accueil</a>
+				<a href="{{ path('welcome') }}" class="nav-link text-black">Accueil</a>
 			</li>
 			<li class="nav-item p-1">
-				<a href="{{ path('user') }}" class="nav-link">Votre espace</a>
+				<a href="{{ path('user') }}" class="nav-link text-black">Votre espace</a>
 			</li>
 			<li class="nav-item p-1">
-				<a href="{{ path('app_login') }}" class="nav-link">Connectez-vous</a>
+				<a href="{{ path('app_login') }}" class="nav-link text-black">Connectez-vous</a>
 			</li>
 		</ul>
 	</nav>
